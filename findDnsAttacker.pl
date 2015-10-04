@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #
 #
-# findAttacker  -    This scripts gets BING loging data via STDIN and performs pattern matching
+# findAttacker  -    This scripts gets BIND loging data via STDIN and performs pattern matching
 #                    to identify any attacker. 
 #
 # Author            Emre Erkunt
@@ -67,11 +67,9 @@ my $daemonLog = "/var/log/daemon.log";
 my $version = "0.1.4";
 our $defaultLogLevel = "DEBUG";
 our $logFilename = "/var/log/findAttacker.log";
-our @emailList = ( "emre.erkunt\@superonline.net",
-		   "team-sol-n-co-st\@superonline.net",
-		   "cem.kokten\@superonline.net"
-				 );
-our $SMTPServer = "85.29.60.242";
+our @emailList = ( ); # Your emails should be here
+my $baseDir = "/etc/findAttacker" # Change this to however you like.
+our $SMTPServer = ""; # Your SMTP Server IP should be here.
 
 $| = 1;
 our @ignoreList;
@@ -85,14 +83,14 @@ INIT {
     }
 	
 
-open(IGNORELIST, "/etc/findAttacker/ignoreList.list") or logMe("FATAL", "Can not find any ignore list /etc/findAttacker/ignoreList.list");
+open(IGNORELIST, $baseDir."/ignoreList.list") or logMe("FATAL", "Can not find any ignore list ".$baseDir."/ignoreList.list");
 while(<IGNORELIST>) {
 	chomp($_);
 	push(@ignoreList, $_);
 }
 close(IGNORELIST);
 
-open(WHITELIST, "/etc/findAttacker/whiteList.list") or logMe("FATAL", "Can not find any ignore list /etc/findAttacker/whiteList.list");
+open(WHITELIST, $baseDir."/whiteList.list") or logMe("FATAL", "Can not find any ignore list ".$baseDir."/whiteList.list");
 while(<WHITELIST>) {
 	chomp($_);
 	push(@whiteList, $_);
