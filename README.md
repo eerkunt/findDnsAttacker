@@ -42,7 +42,7 @@ Script listens the traffic for PRSD attack. Use pattern matching algorithms to i
 
 It is Pseudo-Random Subdomain Attacks. Some call it "Death by 1000 paper cuts", it really is. A malicious attacker generates DNS traffic against your DNS Server with ;
 
-* Random Source IPs ( even we block DNS traffic from out of the country, we have this attack 24/7 )
+* Random Source IPs (even we block DNS traffic from out of the country, we have this attack 24/7)
 * Random generated Prefix or Suffix subdomains
 
 So usually you have a DNS traffic with a huge amount of Queries like ;
